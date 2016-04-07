@@ -20,12 +20,16 @@ inline EatShifts eatShifts() { EatShifts result;  return result; }
 #define NOTREACHED() ExcAssert(false)
 #define DCHECK(x) ExcAssert((x)); eatShifts()
 
-#if 0
+//#if 0
 
 #include <string>
 #include <cstring>
 #include <strstream>
+#if __WIN32
 #include <tchar.h>
+#else
+#define TCHAR char
+#endif
 
 #include "base/basictypes.h"
 #include "base/scoped_ptr.h"
@@ -497,6 +501,6 @@ inline std::ostream& operator<<(std::ostream& out, const std::wstring& wstr) {
   return out << wstr.c_str();
 }
 
-#endif
+//#endif
 
 #endif  // BASE_LOGGING_H__

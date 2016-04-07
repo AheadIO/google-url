@@ -32,7 +32,7 @@
 #include "googleurl/src/url_parse.h"
 #include "googleurl/src/url_test_utils.h"
 #include "googleurl/src/url_util.h"
-#include "testing/gtest/include/gtest/gtest.h"
+#include "gtest/gtest.h"
 
 TEST(URLUtilTest, FindAndCompareScheme) {
   url_parse::Component found_scheme;

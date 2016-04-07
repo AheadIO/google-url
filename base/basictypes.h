@@ -3,9 +3,12 @@
 #ifndef BASE_BASICTYPES_H__
 #define BASE_BASICTYPES_H__
 
+#include <stdio.h>
+
 typedef unsigned char  uint8;
 typedef unsigned short uint16;
 typedef unsigned int   uint32;
+typedef unsigned long int uint64;
 
 const uint8  kuint8max  = (( uint8) 0xFF);
 const uint32 kuint32max = ((uint32) 0xFFFFFFFF);

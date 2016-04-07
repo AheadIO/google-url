@@ -36,7 +36,7 @@
 #include "googleurl/src/url_canon_stdstring.h"
 #include "googleurl/src/url_parse.h"
 #include "googleurl/src/url_test_utils.h"
-#include "testing/gtest/include/gtest/gtest.h"
+#include "gtest/gtest.h"
 
 // Some implementations of base/basictypes.h may define ARRAYSIZE.
 // If it's not defined, we define it to the ARRAYSIZE_UNSAFE macro

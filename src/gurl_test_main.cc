@@ -27,7 +27,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "build/build_config.h"
+//#include "build/build_config.h"
 
 #if defined(OS_WIN)
 #include <windows.h>
@@ -35,7 +35,7 @@
 
 #include <string>
 
-#include "testing/gtest/include/gtest/gtest.h"
+#include "gtest/gtest.h"
 #include "unicode/putil.h"
 #include "unicode/udata.h"
 

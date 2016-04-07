@@ -30,8 +30,10 @@
 #include <ctime>
 #include <iomanip>
 #include <cstring>
+#ifdef __WIN32
 #include <windows.h>
 #include <tchar.h>
+#endif // __WIN32
 #include <algorithm>
 #include "base/logging.h"
 
