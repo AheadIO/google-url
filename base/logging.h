@@ -20,7 +20,7 @@ inline EatShifts eatShifts() { EatShifts result;  return result; }
 #define NOTREACHED() ExcAssert(false)
 #define DCHECK(x) ExcAssert((x)); eatShifts()
 
-//#if 0
+#if 0
 
 #include <string>
 #include <cstring>
@@ -501,6 +501,6 @@ inline std::ostream& operator<<(std::ostream& out, const std::wstring& wstr) {
   return out << wstr.c_str();
 }
 
-//#endif
+#endif //#if 0
 
 #endif  // BASE_LOGGING_H__

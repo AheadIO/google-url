@@ -27,6 +27,8 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#include "base/logging.h"
+
 #include <ctime>
 #include <iomanip>
 #include <cstring>
@@ -35,7 +37,7 @@
 #include <tchar.h>
 #endif // __WIN32
 #include <algorithm>
-#include "base/logging.h"
+
 
 namespace logging {
 

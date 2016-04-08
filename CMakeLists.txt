@@ -26,7 +26,8 @@ file(GLOB_RECURSE BASE_HDR_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} base/*.h)
 
 file(GLOB_RECURSE SRC_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} src/*.cc)
 file(GLOB_RECURSE HDR_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} src/*.h)
-
+list(REMOVE_ITEM BASE_SRC_FILES "base/logging.cc")
+list(REMOVE_ITEM BASE_HDR_FILES "base/logging.h")
 
 #-------------------------------------------------------------------------------
 # Software Dependencies
@@ -40,6 +41,7 @@ include_directories(${GTEST_INCLUDE_DIRS})
 set(include_dirs
     ${CMAKE_CURRENT_SOURCE_DIR}/..
     ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/third_party
     )
 
 include_directories(${include_dirs})
@@ -55,3 +57,26 @@ target_link_libraries(
     ${PROJECT}
     ${GTEST_BOTH_LIBRARIES}
     )
+
+
+#-------------------------------------------------------------------------------
+# Install
+#-------------------------------------------------------------------------------
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src"
+        DESTINATION "include/googleurl"
+        FILES_MATCHING PATTERN "*.h"
+)
+
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/base"
+        DESTINATION "include/googleurl"
+        FILES_MATCHING PATTERN "*.h"
+)
+
+install( TARGETS ${PROJECT}
+    COMPONENT Runtime
+    RUNTIME DESTINATION "bin"
+    LIBRARY DESTINATION "bin"
+    ARCHIVE DESTINATION "lib"
+)
+
+
