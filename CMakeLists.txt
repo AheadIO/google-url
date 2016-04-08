@@ -72,6 +72,11 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/base"
         FILES_MATCHING PATTERN "*.h"
 )
 
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/third_party/jml"
+        DESTINATION "include"
+        FILES_MATCHING PATTERN "*.h"
+)
+
 install( TARGETS ${PROJECT}
     COMPONENT Runtime
     RUNTIME DESTINATION "bin"
