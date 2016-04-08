@@ -2,8 +2,6 @@
 # Cmake configuration
 #-------------------------------------------------------------------------------
 cmake_minimum_required(VERSION 2.8.11)
-set(CUSTOM_CMAKE_MODULE_PATH "/home/yeti/mnt/workspace/src/oo-cezanne/macros/cmake")
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CUSTOM_CMAKE_MODULE_PATH}")
 
 #-------------------------------------------------------------------------------
 # project configuration
