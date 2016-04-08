@@ -44,7 +44,13 @@ set(include_dirs
 
 include_directories(${include_dirs})
 
-add_library(${PROJECT}
+if(CMAKE_SHARED_LIBS)
+    set(LIB_TYPE "SHARED")
+else()
+    set(LIB_TYPE "STATIC")
+endif()
+
+add_library(${PROJECT} ${LIB_TYPE}
 	${SRC_FILES}
 	${SRC_FILES}
 	${BASE_SRC_FILES}
