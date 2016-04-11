@@ -90,7 +90,7 @@ void DoParseUNC(const CHAR* spec,
     return;
   }
 
-#ifdef WIN32
+#ifdef __WIN32
   // See if we have something that looks like a path following the first
   // component. As in "file://localhost/c:/", we get "c:/" out. We want to
   // treat this as a having no host but the path given. Works on Windows only.
@@ -159,7 +159,7 @@ void DoParseFileURL(const CHAR* spec, int spec_len, Parsed* parsed) {
   int num_slashes;
   int after_scheme;
   int after_slashes;
-#ifdef WIN32
+#ifdef __WIN32
   // See how many slashes there are. We want to handle cases like UNC but also
   // "/c:/foo". This is when there is no scheme, so we can allow pages to do
   // links like "c:/foo/bar" or "//foo/bar". This is also called by the
@@ -200,7 +200,7 @@ void DoParseFileURL(const CHAR* spec, int spec_len, Parsed* parsed) {
   num_slashes = CountConsecutiveSlashes(spec, after_scheme, spec_len);
 
   after_slashes = after_scheme + num_slashes;
-#ifdef WIN32
+#ifdef __WIN32
   // Check whether the input is a drive again. We checked above for windows
   // drive specs, but that's only at the very beginning to see if we have a
   // scheme at all. This test will be duplicated in that case, but will
@@ -219,7 +219,7 @@ void DoParseFileURL(const CHAR* spec, int spec_len, Parsed* parsed) {
     DoParseUNC(spec, after_slashes, spec_len, parsed);
     return;
   }
-#endif  // WIN32
+#endif  // __WIN32
 
   // Easy and common case, the full path immediately follows the scheme
   // (modulo slashes), as in "file://c:/foo". Just treat everything from

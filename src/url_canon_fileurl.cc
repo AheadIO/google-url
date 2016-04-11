@@ -38,7 +38,7 @@ namespace url_canon {
 
 namespace {
 
-#ifdef WIN32
+#ifdef __WIN32
 
 // Given a pointer into the spec, this copies and canonicalizes the drive
 // letter and colon to the output, if one is found. If there is not a drive
@@ -74,7 +74,7 @@ int FileDoDriveSpec(const CHAR* spec, int begin, int end,
   return after_slashes + 2;
 }
 
-#endif  // WIN32
+#endif  // __WIN32
 
 template<typename CHAR, typename UCHAR>
 bool DoFileCanonicalizePath(const CHAR* spec,
@@ -84,11 +84,11 @@ bool DoFileCanonicalizePath(const CHAR* spec,
   // Copies and normalizes the "c:" at the beginning, if present.
   out_path->begin = output->length();
   int after_drive;
-#ifdef WIN32
+#ifdef __WIN32
   after_drive = FileDoDriveSpec(spec, path.begin, path.end(), output);
 #else
   after_drive = path.begin;
-#endif
+#endif // __WIN32
 
   // Copies the rest of the path, starting from the slash following the
   // drive colon (if any, Windows only), or the first slash of the path.

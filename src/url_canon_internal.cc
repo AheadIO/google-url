@@ -383,7 +383,7 @@ bool SetupUTF16OverrideComponents(const char* base,
   return success;
 }
 
-#ifndef WIN32
+#ifndef __WIN32
 
 int _itoa_s(int value, char* buffer, size_t size_in_chars, int radix) {
   const char* format_str;
@@ -422,6 +422,6 @@ int _itow_s(int value, char16* buffer, size_t size_in_chars, int radix) {
   return 0;
 }
 
-#endif  // !WIN32
+#endif  // !__WIN32
 
 }  // namespace url_canon

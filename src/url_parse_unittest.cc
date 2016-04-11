@@ -398,7 +398,7 @@ TEST(URLParser, PathURL) {
   }
 }
 
-#ifdef WIN32
+#ifdef __WIN32
 
 // WindowsFile ----------------------------------------------------------------
 
@@ -453,7 +453,7 @@ TEST(URLParser, WindowsFile) {
   }
 }
 
-#endif  // WIN32
+#endif  // __WIN32
 
 TEST(URLParser, ExtractFileName) {
   struct FileCase {

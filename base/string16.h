@@ -54,12 +54,12 @@
 
 #include "googleurl/base/basictypes.h"
 
-#ifdef WIN32
+#ifdef __WIN32
 
 typedef wchar_t char16;
 typedef std::wstring string16;
 
-#else  // !WIN32
+#else  // !__WIN32
 
 typedef uint16 char16;
 
@@ -187,6 +187,6 @@ typedef std::basic_string<char16, base::string16_char_traits> string16;
 
 extern std::ostream& operator<<(std::ostream& out, const string16& str);
 
-#endif  // !WIN32
+#endif  // !__WIN32
 
 #endif  // BASE_STRING16_H_

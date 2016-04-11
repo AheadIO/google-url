@@ -27,7 +27,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifdef WIN32
+#ifdef __WIN32
 #include <windows.h>
 #else
 #include <pthread.h>
@@ -66,7 +66,7 @@ bool InitCanonical(const STR& input_spec,
 static std::string* empty_string = NULL;
 static GURL* empty_gurl = NULL;
 
-#ifdef WIN32
+#ifdef __WIN32
 
 // Returns a static reference to an empty string for returning a reference
 // when there is no underlying string.
@@ -101,7 +101,7 @@ const std::string& EmptyStringForGURL() {
   return *empty_string;
 }
 
-#endif  // WIN32
+#endif  // __WIN32
 
 } // namespace
 
@@ -417,7 +417,7 @@ bool GURL::HostIsIPAddress() const {
   return host_info.IsIPAddress();
 }
 
-#ifdef WIN32
+#ifdef __WIN32
 
 const GURL& GURL::EmptyGURL() {
   // Avoid static object construction/destruction on startup/shutdown.
@@ -447,7 +447,7 @@ const GURL& GURL::EmptyGURL() {
   return *empty_gurl;
 }
 
-#endif  // WIN32
+#endif  // __WIN32
 
 bool GURL::DomainIs(const char* lower_ascii_domain,
                     int domain_len) const {

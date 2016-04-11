@@ -18,7 +18,6 @@ add_compile_options(-fno-rtti)  # Removing rtti
 
 if (WIN32)
     add_definitions(-DMSYS2=1)
-	add_definitions(-DWIN32)
 endif()
 
 #-------------------------------------------------------------------------------

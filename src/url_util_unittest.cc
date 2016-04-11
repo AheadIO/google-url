@@ -150,11 +150,11 @@ TEST(URLUtilTest, ReplaceScheme) {
             CheckReplaceScheme("about:google.com", "http"));
   EXPECT_EQ("http:", CheckReplaceScheme("", "http"));
 
-#ifdef WIN32
+#ifdef __WIN32
   // Magic Windows drive letter behavior when converting to a file URL.
   EXPECT_EQ("file:///E:/foo/",
             CheckReplaceScheme("http://localhost/e:foo/", "file"));
-#endif
+#endif // __WIN32
 
   // This will probably change to "about://google.com/" when we fix
   // http://crbug.com/160 which should also be an acceptable result.

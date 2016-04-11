@@ -66,7 +66,7 @@ bool AreSchemesEqual(const char* base,
   return true;
 }
 
-#ifdef WIN32
+#ifdef __WIN32
 
 // Here, we also allow Windows paths to be represented as "/C:/" so we can be
 // consistent about URL paths beginning with slashes. This function is like
@@ -81,7 +81,7 @@ bool DoesBeginSlashWindowsDriveSpec(const CHAR* spec, int start_offset,
       url_parse::DoesBeginWindowsDriveSpec(spec, start_offset + 1, spec_len);
 }
 
-#endif  // WIN32
+#endif  // __WIN32
 
 // See IsRelativeURL in the header file for usage.
 template<typename CHAR>
@@ -104,7 +104,7 @@ bool DoIsRelativeURL(const char* base,
     return true;
   }
 
-#ifdef WIN32
+#ifdef __WIN32
   // We special case paths like "C:\foo" so they can link directly to the
   // file on Windows (IE compatability). The security domain stuff should
   // prevent a link like this from actually being followed if its on a
@@ -119,7 +119,7 @@ bool DoIsRelativeURL(const char* base,
   if (url_parse::DoesBeginWindowsDriveSpec(url, begin, url_len) ||
       url_parse::DoesBeginUNCPath(url, begin, url_len, true))
     return true;
-#endif  // WIN32
+#endif  // __WIN32
 
   // See if we've got a scheme, if not, we know this is a relative URL.
   // BUT: Just because we have a scheme, doesn't make it absolute.
@@ -228,7 +228,7 @@ void CopyOneComponent(const char* source,
   output_component->len = output->length() - output_component->begin;
 }
 
-#ifdef WIN32
+#ifdef __WIN32
 
 // Called on Windows when the base URL is a file URL, this will copy the "C:"
 // to the output, if there is a drive letter and if that drive letter is not
@@ -273,7 +273,7 @@ int CopyBaseDriveSpecIfNecessary(const char* base_url,
   return base_path_begin;
 }
 
-#endif  // WIN32
+#endif  // __WIN32
 
 // A subroutine of DoResolveRelativeURL, this resolves the URL knowning that
 // the input is a relative path or less (qyuery or ref).
@@ -308,7 +308,7 @@ bool DoResolveRelativePath(const char* base_url,
     // incoming URL does not provide a drive spec. We save the true path
     // beginning so we can fix it up after we are done.
     int base_path_begin = base_parsed.path.begin;
-#ifdef WIN32
+#ifdef __WIN32
     if (base_is_file) {
       base_path_begin = CopyBaseDriveSpecIfNecessary(
           base_url, base_parsed.path.begin, base_parsed.path.end(),
@@ -318,7 +318,7 @@ bool DoResolveRelativePath(const char* base_url,
       // and we can start appending the rest of the path. |base_path_begin|
       // points to the character in the base that comes next.
     }
-#endif  // WIN32
+#endif  // __WIN32
 
     if (url_parse::IsURLSlash(relative_url[path.begin])) {
       // Easy case: the path is an absolute path on the server, so we can
@@ -475,7 +475,7 @@ bool DoResolveRelativeURL(const char* base_url,
   int num_slashes = url_parse::CountConsecutiveSlashes(
       relative_url, relative_component.begin, relative_component.end());
 
-#ifdef WIN32
+#ifdef __WIN32
   // On Windows, two slashes for a file path (regardless of which direction
   // they are) means that it's UNC. Two backslashes on any base scheme mean
   // that it's an absolute UNC path (we use the base_is_file flag to control
@@ -509,7 +509,7 @@ bool DoResolveRelativeURL(const char* base_url,
     return DoResolveAbsoluteFile(relative_url, relative_component,
                                  query_converter, output, out_parsed);
   }
-#endif
+#endif // __WIN32
 
   // Any other double-slashes mean that this is relative to the scheme.
   if (num_slashes >= 2) {

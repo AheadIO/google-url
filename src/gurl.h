@@ -33,7 +33,7 @@
 #include <iosfwd>
 #include <string>
 
-#ifdef WIN32
+#ifdef __WIN32
 #include <cstring>
 #endif
 

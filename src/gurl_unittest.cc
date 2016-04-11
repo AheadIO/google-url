@@ -54,13 +54,13 @@ TEST(GURLTest, Types) {
   EXPECT_EQ("http://hostname.com/", TypesTestCase("http://HOSTNAME.com"));
   EXPECT_EQ("http://hostname.com/", TypesTestCase("http:///HOSTNAME.com"));
 
-#ifdef WIN32
+#ifdef __WIN32
   // URLs that look like absolute Windows drive specs.
   EXPECT_EQ("file:///C:/foo.txt", TypesTestCase("c:\\foo.txt"));
   EXPECT_EQ("file:///Z:/foo.txt", TypesTestCase("Z|foo.txt"));
   EXPECT_EQ("file://server/foo.txt", TypesTestCase("\\\\server\\foo.txt"));
   EXPECT_EQ("file://server/foo.txt", TypesTestCase("//server/foo.txt"));
-#endif
+#endif // __WIN32
 }
 
 // Test the basic creation and querying of components in a GURL. We assume
@@ -289,9 +289,9 @@ TEST(GURLTest, Replacements) {
     {"http://www.google.com/foo/bar.html?foo#bar", NULL, NULL, NULL, NULL, NULL, "/", "", "", "http://www.google.com/"},
     {"http://www.google.com/foo/bar.html?foo#bar", "javascript", "", "", "", "", "window.open('foo');", "", "", "javascript:window.open('foo');"},
     {"file:///C:/foo/bar.txt", "http", NULL, NULL, "www.google.com", "99", "/foo","search", "ref", "http://www.google.com:99/foo?search#ref"},
-#ifdef WIN32
+#ifdef __WIN32
     {"http://www.google.com/foo/bar.html?foo#bar", "file", "", "", "", "", "c:\\", "", "", "file:///C:/"},
-#endif
+#endif // __WIN32
 #ifdef FULL_FILESYSTEM_URL_SUPPORT
     {"filesystem:http://www.google.com/foo/bar.html?foo#bar", NULL, NULL, NULL, NULL, NULL, "/", "", "", "filesystem:http://www.google.com/foo/"},
 #endif

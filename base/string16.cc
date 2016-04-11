@@ -29,14 +29,14 @@
 #include "base/string16.h"
 #include <memory.h>
 
-#ifdef WIN32
+#ifdef __WIN32
 
 #error This file should not be used on 2-byte wchar_t systems
 // If this winds up being needed on 2-byte wchar_t systems, either the
 // definitions below can be used, or the host system's wide character
 // functions like wmemcmp can be wrapped.
 
-#else  // !WIN32
+#else  // !__WIN32
 
 namespace base {
 

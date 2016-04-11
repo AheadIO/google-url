@@ -163,7 +163,7 @@ bool DoCanonicalize(const CHAR* in_spec, int in_spec_len,
                                          &whitespace_buffer, &spec_len);
 
   url_parse::Parsed parsed_input;
-#ifdef WIN32
+#ifdef __WIN32
   // For Windows, we allow things that look like absolute Windows paths to be
   // fixed up magically to file URLs. This is done for IE compatability. For
   // example, this will change "c:/foo" into a file URL rather than treating

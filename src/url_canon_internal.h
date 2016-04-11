@@ -430,7 +430,7 @@ bool CanonicalizePartialPath(const char16* spec,
                              int path_begin_in_output,
                              CanonOutput* output);
 
-#ifndef WIN32
+#ifndef __WIN32
 
 // Implementations of Windows' int-to-string conversions
 GURL_API int _itoa_s(int value, char* buffer, size_t size_in_chars, int radix);
@@ -454,7 +454,7 @@ inline unsigned long long _strtoui64(const char* nptr,
   return strtoull(nptr, endptr, base);
 }
 
-#endif  // WIN32
+#endif  // __WIN32
 
 }  // namespace url_canon
 

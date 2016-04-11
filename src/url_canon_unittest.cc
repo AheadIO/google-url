@@ -403,7 +403,7 @@ TEST(URLCanonTest, Host) {
     {NULL, L"GOO\x200b\x2060\xfeffgoo.com", "googoo.com", url_parse::Component(0, 10), CanonHostInfo::NEUTRAL, -1, ""},
       // Ideographic full stop (full-width period for Chinese, etc.) should be
       // treated as a dot.
-      #ifndef WIN32
+      #ifndef __WIN32
     {NULL, L"www.foo\x3002"L"bar.com", "www.foo.bar.com", url_parse::Component(0, 15), CanonHostInfo::NEUTRAL, -1, ""},
       #endif
       // Invalid unicode characters should fail...
@@ -1597,7 +1597,7 @@ TEST(URLCanonTest, CanonicalizeFileURL) {
     url_parse::Component expected_host;
     url_parse::Component expected_path;
   } cases[] = {
-#ifdef WIN32
+#ifdef __WIN32
       // Windows-style paths
     {"file:c:\\foo\\bar.html", "file:///C:/foo/bar.html", true, url_parse::Component(), url_parse::Component(7, 16)},
     {"  File:c|////foo\\bar.html", "file:///C:////foo/bar.html", true, url_parse::Component(), url_parse::Component(7, 19)},
@@ -1648,7 +1648,7 @@ TEST(URLCanonTest, CanonicalizeFileURL) {
     {"file://localhost",  "file://localhost/", true, url_parse::Component(7, 9), url_parse::Component(16, 1)},
     {"file://localhost/", "file://localhost/", true, url_parse::Component(7, 9), url_parse::Component(16, 1)},
     {"file://localhost/test", "file://localhost/test", true, url_parse::Component(7, 9), url_parse::Component(16, 5)},
-#endif  // WIN32
+#endif  // __WIN32
   };
 
   for (size_t i = 0; i < ARRAYSIZE(cases); i++) {
@@ -1818,7 +1818,7 @@ TEST(URLCanonTest, CanonicalizeMailtoURL) {
   }
 }
 
-#ifndef WIN32
+#ifndef __WIN32
 
 TEST(URLCanonTest, _itoa_s) {
   // We fill the buffer with 0xff to ensure that it's getting properly
@@ -1893,7 +1893,7 @@ TEST(URLCanonTest, _itow_s) {
   EXPECT_EQ(EINVAL, url_canon::_itow_s(123456, buf, 10));
 }
 
-#endif  // !WIN32
+#endif  // !__WIN32
 
 // Returns true if the given two structures are the same.
 static bool ParsedIsEqual(const url_parse::Parsed& a,
@@ -1993,7 +1993,7 @@ TEST(URLCanonTest, ResolveRelativeURL) {
       // behavior.
     {"http://host/a", true, false, "\\/another/path", true, true, true, "http://another/path"},
     {"http://host/a", true, false, "/\\Another\\path", true, true, true, "http://another/path"},
-#ifdef WIN32
+#ifdef __WIN32
       // Resolving against Windows file base URLs.
     {"file:///C:/foo", true, true, "http://host/", true, false, false, NULL},
     {"file:///C:/foo", true, true, "bar", true, true, true, "file:///C:/bar"},
