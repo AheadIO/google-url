@@ -403,7 +403,9 @@ TEST(URLCanonTest, Host) {
     {NULL, L"GOO\x200b\x2060\xfeffgoo.com", "googoo.com", url_parse::Component(0, 10), CanonHostInfo::NEUTRAL, -1, ""},
       // Ideographic full stop (full-width period for Chinese, etc.) should be
       // treated as a dot.
+      #ifndef WIN32
     {NULL, L"www.foo\x3002"L"bar.com", "www.foo.bar.com", url_parse::Component(0, 15), CanonHostInfo::NEUTRAL, -1, ""},
+      #endif
       // Invalid unicode characters should fail...
       // ...In wide input, ICU will barf and we'll end up with the input as
       //    escaped UTF-8 (the invalid character should be replaced with the
@@ -1595,7 +1597,7 @@ TEST(URLCanonTest, CanonicalizeFileURL) {
     url_parse::Component expected_host;
     url_parse::Component expected_path;
   } cases[] = {
-#ifdef _WIN32
+#ifdef WIN32
       // Windows-style paths
     {"file:c:\\foo\\bar.html", "file:///C:/foo/bar.html", true, url_parse::Component(), url_parse::Component(7, 16)},
     {"  File:c|////foo\\bar.html", "file:///C:////foo/bar.html", true, url_parse::Component(), url_parse::Component(7, 19)},
@@ -1646,7 +1648,7 @@ TEST(URLCanonTest, CanonicalizeFileURL) {
     {"file://localhost",  "file://localhost/", true, url_parse::Component(7, 9), url_parse::Component(16, 1)},
     {"file://localhost/", "file://localhost/", true, url_parse::Component(7, 9), url_parse::Component(16, 1)},
     {"file://localhost/test", "file://localhost/test", true, url_parse::Component(7, 9), url_parse::Component(16, 5)},
-#endif  // _WIN32
+#endif  // WIN32
   };
 
   for (size_t i = 0; i < ARRAYSIZE(cases); i++) {

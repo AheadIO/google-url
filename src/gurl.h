@@ -33,6 +33,10 @@
 #include <iosfwd>
 #include <string>
 
+#ifdef WIN32
+#include <cstring>
+#endif
+
 #include "googleurl/base/string16.h"
 #include "googleurl/src/url_canon.h"
 #include "googleurl/src/url_canon_stdstring.h"

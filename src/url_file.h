@@ -37,7 +37,7 @@
 
 namespace url_parse {
 
-#ifdef WIN32
+#ifdef __WIN32
 
 // We allow both "c:" and "c|" as drive identifiers.
 inline bool IsWindowsDriveSeparator(char16 ch) {
@@ -47,7 +47,7 @@ inline bool IsWindowsDriveLetter(char16 ch) {
   return (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z');
 }
 
-#endif  // WIN32
+#endif  // __WIN32
 
 // Returns the index of the next slash in the input after the given index, or
 // spec_len if the end of the input is reached.
@@ -59,7 +59,7 @@ inline int FindNextSlash(const CHAR* spec, int begin_index, int spec_len) {
   return idx;
 }
 
-#ifdef WIN32
+#ifdef __WIN32
 
 // Returns true if the start_offset in the given spec looks like it begins a
 // drive spec, for example "c:". This function explicitly handles start_offset
@@ -101,7 +101,7 @@ inline bool DoesBeginUNCPath(const CHAR* text,
   return IsURLSlash(text[start_offset]) && IsURLSlash(text[start_offset + 1]);
 }
 
-#endif  // WIN32
+#endif  // __WIN32
 
 }  // namespace url_parse
 

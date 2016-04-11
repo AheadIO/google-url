@@ -35,7 +35,7 @@
 #endif
 
 #if defined(GURL_DLL)
-#if defined(WIN32)
+#if defined(__WIN32)
 #if GURL_IMPLEMENTATION
 #define GURL_API __declspec(dllexport)
 #else

@@ -1,7 +1,7 @@
 #-------------------------------------------------------------------------------
 # Cmake configuration
 #-------------------------------------------------------------------------------
-cmake_minimum_required(VERSION 2.8.11)
+cmake_minimum_required(VERSION 2.8.12)
 
 #-------------------------------------------------------------------------------
 # project configuration
@@ -16,6 +16,11 @@ add_compile_options(-fPIC)
 add_compile_options(-std=c++11) # c++11
 add_compile_options(-fno-rtti)  # Removing rtti
 
+if (WIN32)
+    add_definitions(-DMSYS2=1)
+	add_definitions(-DWIN32)
+endif()
+
 #-------------------------------------------------------------------------------
 # Collect source
 #-------------------------------------------------------------------------------
@@ -24,6 +29,10 @@ file(GLOB_RECURSE BASE_HDR_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} base/*.h)
 
 file(GLOB_RECURSE SRC_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} src/*.cc)
 file(GLOB_RECURSE HDR_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} src/*.h)
+if (WIN32)
+    # /string16.cc:34:2: error: #error This file should not be used on 2-byte wchar_t systems
+    list(REMOVE_ITEM BASE_SRC_FILES "base/string16.cc")
+endif()
 list(REMOVE_ITEM BASE_SRC_FILES "base/logging.cc")
 list(REMOVE_ITEM BASE_HDR_FILES "base/logging.h")
 

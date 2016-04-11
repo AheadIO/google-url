@@ -64,7 +64,12 @@ void appendURLEscapedChar(const void* context,
 
     DCHECK(code_point < 0x110000);
     char number[8];  // Max Unicode code point is 7 digits.
+#ifdef MSYS2
+    _itoa_s(code_point, number, sizeof(number), 10);
+#else
     _itoa_s(code_point, number, 10);
+#endif // MSYS2
+
     int number_len = static_cast<int>(strlen(number));
     ucnv_cbFromUWriteBytes(from_args, number, number_len, 0, err);
 

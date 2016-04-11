@@ -190,8 +190,11 @@ void AppendIPv4Address(const unsigned char address[4],
   out_host->begin = output->length();
   for (int i = 0; i < 4; i++) {
     char str[16];
+#ifdef MSYS2
+    _itoa_s(address[i], str, sizeof(str), 10);
+#else
     _itoa_s(address[i], str, 10);
-
+#endif // MSYS2
     for (int ch = 0; str[ch] != 0; ch++)
       output->push_back(str[ch]);
 
@@ -648,7 +651,12 @@ bool DoCanonicalizeIPv6Address(const CHAR* spec,
 
       // Stringify the 16 bit number (at most requires 4 hex digits).
       char str[5];
+#ifdef MSYS2
+      _itoa_s(x, str, sizeof(str), 16);
+#else
       _itoa_s(x, str, 16);
+#endif // MSYS2
+
       for (int ch = 0; str[ch] != 0; ++ch)
         output->push_back(str[ch]);
 
